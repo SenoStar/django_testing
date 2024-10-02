@@ -100,7 +100,7 @@ def more_comments(news, author, form_data_for_comment):
         Comment(
             news=news,
             author=author,
-            text=f'{form_data_for_comment['text']} {index}',
+            text=f"{form_data_for_comment['text']} {index}",
             created=datetime.today() - timedelta(days=index))
         for index in range(COMMENT_COUNT_FOR_TEST)
     ]
