@@ -76,7 +76,6 @@ def test_user_cant_delete_comment_of_another_user(
     assert comments_count == initial_count_comments
 
 
-
 def test_user_cant_edit_comment_of_another_user(
         not_author_client, comment_id,
         initial_count_comments, form_data_for_comment

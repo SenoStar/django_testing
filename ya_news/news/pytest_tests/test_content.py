@@ -34,6 +34,7 @@ def test_comments_order(client, news_id, sorted_created_more_comment):
     sorted_timestamps = sorted(all_timestamps)
     assert sorted_timestamps == sorted_created_more_comment
 
+
 @pytest.mark.django_db
 def test_anonymous_client_has_no_form(client, news_id):
     url = reverse('news:detail', args=news_id)

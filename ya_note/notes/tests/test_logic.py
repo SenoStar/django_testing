@@ -31,8 +31,10 @@ class TestLogic(TestCase):
 
     def test_user_can_create_note_and_anonymous_user_cant_create_note(self):
         users = (
-            (self.author, reverse('notes:success')),  # Авторизованный пользователь
-            (self.anonymous, reverse('users:login')),           # Анонимный пользователь
+            # Авторизованный пользователь
+            (self.author, reverse('notes:success')),
+            # Анонимный пользователь
+            (self.anonymous, reverse('users:login')),
         )
         data = self.data
         for user, redirect_url in users:
@@ -40,7 +42,7 @@ class TestLogic(TestCase):
                 self.client.force_login(user)
             with self.subTest(user=user):
                 url = reverse('notes:add')
-                initial_count  = Note.objects.count()
+                initial_count = Note.objects.count()
                 response = self.client.post(url, data=data)
                 if hasattr(user, 'username'):
                     self.assertRedirects(response, redirect_url)
