@@ -1,25 +1,9 @@
-from django.test import TestCase, Client
-from django.contrib.auth import get_user_model
 from django.urls import reverse
 from http import HTTPStatus
-from notes.models import Note
-
-User = get_user_model()
+from notes.tests.base_for_tests import TestBaseData
 
 
-class TestRoutes(TestCase):
-
-    @classmethod
-    def setUpTestData(cls):
-        cls.author = User.objects.create(username='author')
-        cls.user_2 = User.objects.create(username='User2')
-        cls.anonymous = Client()
-        cls.note = Note.objects.create(
-            title='Заголовок',
-            text='Текст',
-            slug='slug',
-            author=cls.author,
-        )
+class TestRoutes(TestBaseData):
 
     def test_availability_pages_for_all(self):
         urls = (

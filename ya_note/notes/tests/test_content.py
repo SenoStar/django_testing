@@ -1,24 +1,9 @@
-from django.test import TestCase
-from django.contrib.auth import get_user_model
 from django.urls import reverse
-from notes.models import Note
 from notes.forms import NoteForm
+from notes.tests.base_for_tests import TestBaseData
 
-User = get_user_model()
 
-
-class TestContent(TestCase):
-
-    @classmethod
-    def setUpTestData(cls):
-        cls.author = User.objects.create(username='author')
-        cls.user_2 = User.objects.create(username='User2')
-        cls.note = Note.objects.create(
-            title='Заголовок',
-            text='Текст',
-            slug='slug',
-            author=cls.author,
-        )
+class TestContent(TestBaseData):
 
     def test_notes_list_for_different_users(self):
         users = (

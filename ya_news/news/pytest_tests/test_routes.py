@@ -12,10 +12,12 @@ from django.urls import reverse
         ('users:login', None),
         ('users:logout', None),
         ('users:signup', None),
-        ('news:detail', pytest.lazy_fixture('news_id')),
+        ('news:detail', pytest.lazy_fixture('news')),
     ),
 )
 def test_pages_availability_for_anonymous_user(client, name, args):
+    if args is not None:
+        args = (args.id,)
     url = reverse(name, args=args)
     response = client.get(url)
     assert response.status_code == HTTPStatus.OK

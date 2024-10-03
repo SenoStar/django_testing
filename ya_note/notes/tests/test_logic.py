@@ -1,33 +1,12 @@
-from django.test import TestCase, Client
-from django.contrib.auth import get_user_model
 from django.urls import reverse
 from http import HTTPStatus
 from pytils.translit import slugify
-from notes.models import Note
 from notes.forms import WARNING
+from notes.models import Note
+from notes.tests.base_for_tests import TestBaseData
 
-User = get_user_model()
 
-
-class TestLogic(TestCase):
-
-    @classmethod
-    def setUpTestData(cls):
-        cls.author = User.objects.create(username='author')
-        cls.user_2 = User.objects.create(username='User2')
-        cls.anonymous = Client()
-        cls.note = Note.objects.create(
-            title='Заголовок',
-            text='Текст',
-            slug='slug',
-            author=cls.author,
-        )
-        cls.data = {
-            'title': 'Новая заметка',
-            'text': 'Текст новой заметки',
-            'slug': 'new-note',
-            'author': cls.author,
-        }
+class TestLogic(TestBaseData):
 
     def test_user_can_create_note_and_anonymous_user_cant_create_note(self):
         users = (
